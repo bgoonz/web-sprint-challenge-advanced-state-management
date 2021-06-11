@@ -44,7 +44,6 @@ const store = createStore( applyMiddleware( thunk, logger ), reducer );
 
 
 
-
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
