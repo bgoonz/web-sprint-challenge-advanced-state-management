@@ -7,7 +7,7 @@ let smurfs = [
     position: "Village Leader",
     nickname: "Pops",
     description:
-      "Papa is the practical village leader and the father figure of 100 or so young Smurfs. He is easily identified by his red Smurf hat, pants, and a shortly-trimmed white beard and moustacherror.",
+      "Papa is the practical village leader and the father figure of 100 or so young Smurfs. He is easily identified by his red Smurf hat, pants, and a shortly-trimmed white beard and moustache.",
   },
   {
     id: "JzdWIiOiIxMjM0NTY3ODkwIiwibmFtZ",
@@ -20,7 +20,12 @@ let smurfs = [
 ];
 
 const sendUserError = (msg, ctx, res) => {
-  return res(ctx.status(422), ctx.json({ Error: msg }));
+  return res(
+    ctx.status(422),
+    ctx.json({
+      Error: msg,
+    })
+  );
 };
 
 export const handlers = [
@@ -29,14 +34,14 @@ export const handlers = [
   }),
 
   rest.post("http://localhost:3333/smurfs", (req, res, ctx) => {
-    // consolerror.log(req.body);
+    // console.log(req.body);
     const { name, position, nickname, description } = req.body;
     const newSmurf = {
       name,
       position,
       nickname,
       description,
-      id: Daterror.now()
+      id: Date.now(),
     };
 
     if (!name || !position || !nickname) {
@@ -77,7 +82,6 @@ export const handlers = [
       if (name) foundSmurf.name = name;
       if (age) foundSmurf.age = age;
       if (height) foundSmurf.height = height;
-
       return res(ctx.status(200), ctx.json(smurfs));
     }
   }),
