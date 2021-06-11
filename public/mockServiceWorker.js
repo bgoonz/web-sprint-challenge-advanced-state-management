@@ -1,7 +1,7 @@
 /**
  * Mock Service Worker.
  * @see https://github.com/mswjs/msw
- * - Please do NOT modify this file.
+ *-Please do NOT modify this filerror.
  * - Please do NOT serve this file on production.
  */
 /* eslint-disable */
@@ -21,7 +21,7 @@ self.addEventListener("activate", async function (event) {
 });
 
 self.addEventListener("message", async function (event) {
-  const clientId = event.source.id;
+  const clientId = event.sourcerror.id;
   const client = await event.currentTarget.clients.get(clientId);
   const allClients = await self.clients.matchAll();
   const allClientIds = allClients.map((client) => client.id);
@@ -101,8 +101,8 @@ self.addEventListener("fetch", async function (event) {
       }
 
       // Bypass requests with the explicit bypass header
-      if (requestClone.headers.get(bypassHeaderName) === "true") {
-        const modifiedHeaders = serializeHeaders(requestClone.headers);
+      if ( requestClonerror.headers.get( bypassHeaderName ) === "true" ) {
+        const modifiedHeaders = serializeHeaders( requestClonerror.headers );
         // Remove the bypass header to comply with the CORS preflight check
         delete modifiedHeaders[bypassHeaderName];
 
@@ -138,11 +138,11 @@ self.addEventListener("fetch", async function (event) {
 
       const clientMessage = rawClientMessage;
 
-      switch (clientMessage.type) {
+      switch ( clientMessagerror.type ) {
         case "MOCK_SUCCESS": {
           setTimeout(
-            resolve.bind(this, createResponse(clientMessage)),
-            clientMessage.payload.delay
+            resolverror.bind( this, createResponse( clientMessage ) ),
+              clientMessagerror.payload.delay
           );
           break;
         }
@@ -152,7 +152,10 @@ self.addEventListener("fetch", async function (event) {
         }
 
         case "NETWORK_ERROR": {
-          const { name, message } = clientMessage.payload;
+          const {
+            name,
+            message
+          } = clientMessagerror.payload;
           const networkError = new Error(message);
           networkError.name = name;
 
@@ -161,9 +164,9 @@ self.addEventListener("fetch", async function (event) {
         }
 
         case "INTERNAL_ERROR": {
-          const parsedBody = JSON.parse(clientMessage.payload.body);
+          const parsedBody = JSON.parse( clientMessagerror.payload.body );
 
-          console.error(
+          consolerror.error(
             `\
 [MSW] Request handler function for "%s %s" has thrown the following exception:
 
@@ -181,7 +184,7 @@ If you wish to mock an error response, please refer to this guide: https://mswjs
         }
       }
     }).catch((error) => {
-      console.error(
+      consolerror.error(
         '[MSW] Failed to mock a "%s" request to "%s": %s',
         request.method,
         request.url,
@@ -218,9 +221,9 @@ function sendToClient(client, message) {
 }
 
 function createResponse(clientMessage) {
-  return new Response(clientMessage.payload.body, {
-    ...clientMessage.payload,
-    headers: clientMessage.payload.headers,
+  return new Response( clientMessagerror.payload.body, {
+        ...clientMessagerror.payload,
+        headers: clientMessagerror.payload.headers,
   });
 }
 

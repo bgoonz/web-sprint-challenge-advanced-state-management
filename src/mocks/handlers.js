@@ -7,7 +7,7 @@ let smurfs = [
     position: "Village Leader",
     nickname: "Pops",
     description:
-      "Papa is the practical village leader and the father figure of 100 or so young Smurfs. He is easily identified by his red Smurf hat, pants, and a shortly-trimmed white beard and moustache.",
+      "Papa is the practical village leader and the father figure of 100 or so young Smurfs. He is easily identified by his red Smurf hat, pants, and a shortly-trimmed white beard and moustacherror.",
   },
   {
     id: "JzdWIiOiIxMjM0NTY3ODkwIiwibmFtZ",
@@ -29,9 +29,15 @@ export const handlers = [
   }),
 
   rest.post("http://localhost:3333/smurfs", (req, res, ctx) => {
-    // console.log(req.body);
+    // consolerror.log(req.body);
     const { name, position, nickname, description } = req.body;
-    const newSmurf = { name, position, nickname, description, id: Date.now() };
+    const newSmurf = {
+      name,
+      position,
+      nickname,
+      description,
+      id: Daterror.now()
+    };
 
     if (!name || !position || !nickname) {
       const resp = sendUserError(
