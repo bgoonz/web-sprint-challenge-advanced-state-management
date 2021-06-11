@@ -1,5 +1,28 @@
 # Advanced State Management Sprint Challenge
 
+
+# How to View Feedback in CodeGrade
+
+1. Navigate to your Sprint Challenge in Canvas and scroll down to the CodeGrade box and click "Latest Submission"
+
+    ![How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_8.57.02_AM.png](How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_8.57.02_AM.png)
+
+    2. The AutoTest tab will show you results on the automated tests that were run against your code 
+
+    ![How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_8.57.44_AM.png](How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_8.57.44_AM.png)
+
+    3. The `Feedback Overview` tab will show you general feedback about your code 
+
+    ![How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.56.33_AM.png](How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.56.33_AM.png)
+
+    4. The `Code` tab will show you inline comments, and the code you submitted
+
+    ![How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.57.55_AM.png](How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.57.55_AM.png)
+
+    5. The rubric at the bottom gives you an overall rating in each module and general category 
+
+    ![How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.59.48_AM.png](How%20to%20View%20Feedback%20in%20CodeGrade%2092ad61590987427d88bda5b4c2303df9/Screen_Shot_2021-01-20_at_9.59.48_AM.png)
+
 **Read these instructions carefully. Understand exactly what is expected _before_ starting this Sprint Challenge.**
 
 This challenge allows you to practice the concepts and techniques learned over the past sprint and apply them in a concrete project. This sprint explored **advanced state management**. During this sprint, you studied **the reducer pattern, and redux**. 
