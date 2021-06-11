@@ -2,8 +2,7 @@ Don't fall into the [trap of thinking a library should prescribe how to do ever
 
 Redux *does* offer some alternative ways of dealing with asynchronous stuff, but you should only use those when you realize you are repeating too much code. Unless you have this problem, use what the language offers and go for the simplest solution.
 
-Writing Async Code Inline
--------------------------
+## Writing Async Code Inline
 
 This is by far the simplest way. And there's nothing specific to Redux here.
 
@@ -60,13 +59,12 @@ setTimeout(() => {
 
 So far we have not used any middleware or other advanced concept.
 
-Extracting Async Action Creator
--------------------------------
+## Extracting Async Action Creator
 
 The approach above works fine in simple cases but you might find that it has a few problems:
 
--   It forces you to duplicate this logic anywhere you want to show a notification.
--   The notifications have no IDs so you'll have a race condition if you show two notifications fast enough. When the first timeout finishes, it will dispatch `HIDE_NOTIFICATION`, erroneously hiding the second notification sooner than after the timeout.
+- It forces you to duplicate this logic anywhere you want to show a notification.
+- The notifications have no IDs so you'll have a race condition if you show two notifications fast enough. When the first timeout finishes, it will dispatch `HIDE_NOTIFICATION`, erroneously hiding the second notification sooner than after the timeout.
 
 To solve these problems, you would need to extract a function that centralizes the timeout logic and dispatches those two actions. It might look like this:
 
@@ -170,8 +168,7 @@ showNotificationWithTimeout(this.props.dispatch, 'You just logged out.')
 
 This solves the problems with duplication of logic and saves us from race conditions.
 
-Thunk Middleware
-----------------
+## Thunk Middleware
 
 For simple apps, the approach should suffice. Don't worry about middleware if you're happy with it.
 
@@ -308,8 +305,7 @@ export default connect(
 
 ```
 
-Reading State in Thunks
------------------------
+## Reading State in Thunks
 
 Usually your reducers contain the business logic for determining the next state. However, reducers only kick in after the actions are dispatched. What if you have a side effect (such as calling an API) in a thunk action creator, and you want to prevent it under some condition?
 
@@ -348,8 +344,7 @@ export function showNotificationWithTimeout(text) {
 
 Don't abuse this pattern. It is good for bailing out of API calls when there is cached data available, but it is not a very good foundation to build your business logic upon. If you use `getState()` only to conditionally dispatch different actions, consider putting the business logic into the reducers instead.
 
-Next Steps
-----------
+## Next Steps
 
 Now that you have a basic intuition about how thunks work, check out Redux [async example](https://redux.js.org/introduction/examples#async) which uses them.
 
@@ -401,25 +396,25 @@ answered Feb 15 '16 at 17:33
 
 242k7575 gold badges390390 silver badges492492 bronze badges
 
--   29
+- 29
 
-    Async actions seem like such a simple and elegant solution to a common problem. Why isn't support for them baked in to redux without the need for middleware? This answer could then be so much more concise. -- [Phil Mander](https://stackoverflow.com/users/200113/phil-mander "1,609 reputation") [Feb 28 '16 at 10:55](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment59040768_35415559)
+  Async actions seem like such a simple and elegant solution to a common problem. Why isn't support for them baked in to redux without the need for middleware? This answer could then be so much more concise. -- [Phil Mander](https://stackoverflow.com/users/200113/phil-mander "1,609 reputation") [Feb 28 '16 at 10:55](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment59040768_35415559)
 
--   89
+- 89
 
-    @PhilMander Because there are many alternative patterns like [github.com/raisemarketplace/redux-loop](https://github.com/raisemarketplace/redux-loop) or [github.com/yelouafi/redux-saga](https://github.com/yelouafi/redux-saga) which are just as (if not more) elegant. Redux is a low-level tool. You can build a superset you like and distribute it separately. -- [Dan Abramov](https://stackoverflow.com/users/458193/dan-abramov "241,941 reputation") [Feb 28 '16 at 14:32](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment59044920_35415559)
+  @PhilMander Because there are many alternative patterns like [github.com/raisemarketplace/redux-loop](https://github.com/raisemarketplace/redux-loop) or [github.com/yelouafi/redux-saga](https://github.com/yelouafi/redux-saga) which are just as (if not more) elegant. Redux is a low-level tool. You can build a superset you like and distribute it separately. -- [Dan Abramov](https://stackoverflow.com/users/458193/dan-abramov "241,941 reputation") [Feb 28 '16 at 14:32](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment59044920_35415559)
 
--   17
+- 17
 
-    Can you explain this: *consider putting the business logic into the reducers *, does that mean I should dispatch an action, and then determine in the reducer what further actions to dispatch depending on my state? My question is, do I then dispatch other actions directly in my reducer, and if not then where do I dispatch them from? -- [froginvasion](https://stackoverflow.com/users/791750/froginvasion "813 reputation") [Apr 13 '16 at 7:22](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment60780042_35415559)
+  Can you explain this: _consider putting the business logic into the reducers _, does that mean I should dispatch an action, and then determine in the reducer what further actions to dispatch depending on my state? My question is, do I then dispatch other actions directly in my reducer, and if not then where do I dispatch them from? -- [froginvasion](https://stackoverflow.com/users/791750/froginvasion "813 reputation") [Apr 13 '16 at 7:22](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment60780042_35415559)
 
--   27
+- 27
 
-    This sentence only applies to synchronous case. For example if you write `if (cond) dispatch({ type: 'A' }) else dispatch({ type: 'B' })` maybe you should just `dispatch({ type: 'C', something: cond })` and choose to ignore the action in reducers instead depending on `action.something` and the current state. -- [Dan Abramov](https://stackoverflow.com/users/458193/dan-abramov "241,941 reputation") [Apr 13 '16 at 11:29](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment60790647_35415559)
+  This sentence only applies to synchronous case. For example if you write `if (cond) dispatch({ type: 'A' }) else dispatch({ type: 'B' })` maybe you should just `dispatch({ type: 'C', something: cond })` and choose to ignore the action in reducers instead depending on `action.something` and the current state. -- [Dan Abramov](https://stackoverflow.com/users/458193/dan-abramov "241,941 reputation") [Apr 13 '16 at 11:29](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment60790647_35415559)
 
--   37
+- 37
 
-    @DanAbramov You got my upvote just for this "Unless you have this problem, use what the language offers and go for the simplest solution." Only after did I realise who wrote it! -- [Matt Lacey](https://stackoverflow.com/users/481044/matt-lacey "8,077 reputation") [Oct 19 '16 at 3:06](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment67513557_35415559)
+  @DanAbramov You got my upvote just for this "Unless you have this problem, use what the language offers and go for the simplest solution." Only after did I realise who wrote it! -- [Matt Lacey](https://stackoverflow.com/users/481044/matt-lacey "8,077 reputation") [Oct 19 '16 at 3:06](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#comment67513557_35415559)
 
 [Show **16** more comments](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559# "Expand to show all comments on this post")
 
@@ -427,8 +422,7 @@ answered Feb 15 '16 at 17:33
 
 [](https://stackoverflow.com/posts/38574266/timeline)
 
-Using Redux-saga
-================
+# Using Redux-saga
 
 As Dan Abramov said, if you want more advanced control over your async code, you might take a look at [redux-saga](https://github.com/yelouafi/redux-saga).
 
@@ -438,25 +432,22 @@ The general idea is that Redux-saga offers an ES6 generators interpreter that pe
 
 I'll try here to describe here the notification system I built on top of redux-saga. This example currently runs in production.
 
-Advanced notification system specification
-==========================================
+# Advanced notification system specification
 
--   You can request a notification to be displayed
--   You can request a notification to hide
--   A notification should not be displayed more than 4 seconds
--   Multiple notifications can be displayed at the same time
--   No more than 3 notifications can be displayed at the same time
--   If a notification is requested while there are already 3 displayed notifications, then queue/postpone it.
+- You can request a notification to be displayed
+- You can request a notification to hide
+- A notification should not be displayed more than 4 seconds
+- Multiple notifications can be displayed at the same time
+- No more than 3 notifications can be displayed at the same time
+- If a notification is requested while there are already 3 displayed notifications, then queue/postpone it.
 
-Result
-======
+# Result
 
 Screenshot of my production app [Stample.co](http://stample.co/)
 
 [![toasts](https://i.stack.imgur.com/L80nq.png)](https://i.stack.imgur.com/L80nq.png)
 
-Code
-====
+# Code
 
 Here I named the notification a `toast` but this is a naming detail.
 
@@ -538,22 +529,20 @@ const reducer = (state = [],event) => {
 
 ```
 
-Usage
-=====
+# Usage
 
 You can simply dispatch `TOAST_DISPLAY_REQUESTED` events. If you dispatch 4 requests, only 3 notifications will be displayed, and the 4th one will appear a bit later once the 1st notification disappears.
 
 Note that I don't specifically recommend dispatching `TOAST_DISPLAY_REQUESTED` from JSX. You'd rather add another saga that listens to your already-existing app events, and then dispatch the `TOAST_DISPLAY_REQUESTED`: your component that triggers the notification, does not have to be tightly coupled to the notification system.
 
-Conclusion
-==========
+# Conclusion
 
 My code is not perfect but runs in production with 0 bugs for months. Redux-saga and generators are a bit hard initially but once you understand them this kind of system is pretty easy to build.
 
 It's even quite easy to implement more complex rules, like:
 
--   when too many notifications are "queued", give less display-time for each notification so that the queue size can decrease faster.
--   detect window size changes, and change the maximum number of displayed notifications accordingly (for example, desktop=3, phone portrait = 2, phone landscape = 1)
+- when too many notifications are "queued", give less display-time for each notification so that the queue size can decrease faster.
+- detect window size changes, and change the maximum number of displayed notifications accordingly (for example, desktop=3, phone portrait = 2, phone landscape = 1)
 
 Honnestly, good luck implementing this kind of stuff properly with thunks.
 
